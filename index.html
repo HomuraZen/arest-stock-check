@@ -463,7 +463,7 @@ async function submitForm() {
   };
 
   // --- REPLACE THIS URL WITH YOUR GOOGLE APPS SCRIPT WEB APP URL ---
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzFvBaoyc4a0WFtLI96x5kFzPSix12WWjxKA23j4MjXJ_FE-dxRfLdQnivtK6gy_gK8yg/exec';
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxOZd38CsNZiEIwHV9tThB8gWL-8SFHtWBrQR_TdfOB1_18MsIT66J_tSzCsT1yFyRxAA/exec';
 
   if (SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
     // Demo mode
@@ -480,11 +480,12 @@ async function submitForm() {
   }
 
   try {
+    const form = new FormData();
+    form.append('payload', JSON.stringify(payload));
     await fetch(SCRIPT_URL, {
       method: 'POST',
-      mode: 'cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+      mode: 'no-cors',
+      body: form
     });
     btn.disabled = false;
     btn.classList.add('success');
